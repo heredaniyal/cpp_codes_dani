@@ -1,26 +1,14 @@
 #include <iostream>
-using namespace std;
-
-void chutiya()
-{
-    cout << "chutiya" << endl;
+int main() {
+#if __cplusplus == 202002L
+    std::cout << "C++20\n";
+#elif __cplusplus == 201703L
+    std::cout << "C++17\n";
+#elif __cplusplus == 201402L
+    std::cout << "C++14\n";
+#elif __cplusplus == 201103L
+    std::cout << "C++11\n";
+#else
+    std::cout << "Older than C++11\n";
+#endif
 }
-
-void chutiya(int n)
-{
-    cout << "daniyal chutiya" << endl;
-}
-
-void chutiya(int n, int m)
-{
-    cout << "abdullah chutiya" << endl;
-}
-
-
-int main()
-{
-   chutiya(); // calling the function chutiya()   
-       
-    return 0;
-}
-
