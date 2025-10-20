@@ -1,0 +1,38 @@
+# Step 1: Initialize Git in the current folder
+git init
+
+# Step 2: Add all project files to Git
+git add .
+
+# Step 3: Commit the files with a message
+git commit -m "Initial commit"
+
+# Step 4: Rename default branch to main
+git branch -M main
+
+# Step 5: Create a new GitHub repository & push code
+# Replace <repo-name> with your repository name
+gh repo create <repo-name> --public --source=. --remote=origin --push
+
+# Step 6: Enable GitHub Pages for this repository
+# Replace <repo-name> below
+gh api repos/heredaniyal/<repo-name>/pages --method POST --field source[branch]=main --field source[path]=/
+
+
+---- Scenario: Editing an already deployed GitHub Pages project ----
+# Step 1: Make changes to your local project files (e.g., add a submit button)
+# Step 2: Stage the updated files
+git add .
+
+# Step 3: Commit the changes with a message
+git commit -m "Added submit button to form"
+
+# Step 4: Push the changes to GitHub
+git push origin main
+----
+
+git config --global user.name
+git config --global user.email
+
+
+
