@@ -2,6 +2,8 @@
 using namespace std;
 
 /*
+FINALIZED CODE 10/12/2025
+LEARNED SOMETHING NEW
 A school stores its active students’ roll numbers in a Singly Linked List. 
 Initially, the admin inserts these roll numbers at the end: 
 10, 20, 30, 40 
@@ -77,25 +79,6 @@ void deleteatStart() { // no + only -
     }
 }
 
-void deleteEnd() // delete last node
-{
-    if (head == nullptr) // is linked list empty?
-    {
-        cout << " LINKED LIST IS EMPTY! \n";
-    }
-    else // it's not empty
-    {
-        Student *temp = head; // indirectly using head
-        while (temp->next->next != nullptr) // better explained with diagram
-        { 
-          temp = temp->next; // traversing  
-        }
-        // reached second last node
-        temp->next = nullptr; // roadblock
-        output(); // for automatic display
-    }
-}
-
 void deleteAnywhere(int r) // delete at Anywhere
 {
     if (head == nullptr) // 1st node ki jagha meaning insertathead
@@ -112,23 +95,28 @@ void deleteAnywhere(int r) // delete at Anywhere
         // position >= 2
         Student *temp = head; // indirectly using head
 
-        while (temp->next->roll != r && temp != nullptr) // better explained with diagram
+        // ** LEARNED SOMETHING NEW ** 10/12/2025
+        // C++ always checks from left to right
+        // error using while (temp->next->roll != r && temp->next != nullptr)
+        // because it's checking left condition first then right condition
+        // which is wrong, c++ compiles from left to right
+        while (temp->next != nullptr && temp->next->roll != r) // better explained with diagram
         {
-            cout << "MAI PHAS GAYA" << endl;
             temp = temp->next;
         }
 
         // reached node before position
         // now pointer game better with diagram
-        if (temp == nullptr) { // if the roll doesn't exist
-            cout << "ROLL NUMBER DOESN'T EXIST" << endl;
-        }
-        else if (temp->next == nullptr) // is it last node?
+        if (temp->next == nullptr) // is it last node?
         {
-            deleteEnd();
+            // it means it reached the last node still didn't find the number
+            cout << "ROLL NUMBER DOESN'T EXIST \n " << endl;
         }
         else { // it's in between
+            // this will work for every possible case InshaAllah
+            Student * studentdelete = temp->next;
            temp->next = temp->next->next;
+           delete studentdelete;
         output(); // for display
         }
     }
@@ -136,9 +124,11 @@ void deleteAnywhere(int r) // delete at Anywhere
 
 int main()
 {
+    // P.S Make your modifications here, tested everything logging out
+    // 1:44 am 10/12/2025
     for (int i = 10; i <=40; i = i + 10) {
         insertAtEnd(i);
     }
-    deleteAnywhere(50);
+    deleteAnywhere(40);
     return 0;
 }
